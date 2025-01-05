@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/flytekitplugins-spark-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/flytekitplugins-spark-{{ version }}.tar.gz
   sha256: 982750a21884b49a4f0ec1c3b21792a9a17bdfb732b20d665761759e0fa9ec5f
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - flytekit >=1.0.0b3,<1.2.0
     - pyspark >=3.0.0
 
@@ -31,6 +31,7 @@ test:
   #   - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/flytekitplugins-spark/
